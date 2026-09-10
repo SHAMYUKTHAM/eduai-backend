@@ -18,7 +18,7 @@ public class GeminiService {
     private final String apiKey = System.getenv("GEMINI_API_KEY");
 
     private final String apiUrl =
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent";
 
     public String generateResponse(String userMessage) {
 
@@ -77,13 +77,14 @@ public class GeminiService {
                     );
 
             // Check response
-            if (response.statusCode() != 200) {
+        
+if (response.statusCode() != 200) {
 
-                System.out.println("Gemini API Error:");
-                System.out.println(response.body());
+    System.out.println("Gemini API Error - Status: " + response.statusCode());
+    System.out.println("Gemini API Error - Body: " + response.body());
 
-                return "Sorry, I couldn't get a response from Gemini.";
-            }
+    return "Sorry, I couldn't get a response from Gemini.";
+}
 
             // Convert JSON response
             JsonNode jsonResponse =
